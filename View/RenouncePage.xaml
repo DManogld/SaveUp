@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SaveUp.ViewModels"
+             x:Class="SaveUp.View.RenouncePage"
+             Title="Renounce">
+    <ContentPage.BindingContext>
+        <viewModels:RenounceViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <VerticalStackLayout Spacing="10"
+                         Margin="5">
+
+        <Label Text="Aritkel">
+        </Label>
+        <Entry x:Name="TextEditor"
+                Placeholder="Gebe Hier dein Artikel ein.."
+                Text="{Binding Text}"
+                HeightRequest="100" />
+
+        <Label Text="Preis"></Label>
+        <Entry x:Name="Preis"
+               Placeholder="CHF.."
+               Keyboard="Numeric"
+               Text="{Binding Preis}" 
+              />
+
+        <Grid ColumnDefinitions="*,*"
+              ColumnSpacing="4">
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}" />
+
+            <Button Grid.Column="1"
+                    Text="Delete"
+                    Command="{Binding DeleteCommand}" />
+
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

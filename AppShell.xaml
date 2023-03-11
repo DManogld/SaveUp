@@ -3,12 +3,24 @@
     x:Class="SaveUp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SaveUp"
+    xmlns:views="clr-namespace:SaveUp.View"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="Eingabe"
+             Icon="{StaticResource IconOne}">
+            <ShellContent Title="Alle Verzichte"
+                          ContentTemplate="{DataTemplate views:AllRenoucesPage}"
+                          Route="AllRenoucesPage"
+                         />
+        </Tab>
+
+        <Tab Title="Alle Verzichte"
+             Icon="{StaticResource IconTwo}">
+            <ShellContent Title="Eintragen"
+                          ContentTemplate="{DataTemplate views:RenouncePage}"
+                          Route="RenouncePage" />
+        </Tab>
+    </TabBar>
 
 </Shell>
