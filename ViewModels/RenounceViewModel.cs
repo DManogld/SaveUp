@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 
@@ -28,7 +27,7 @@ namespace SaveUp.ViewModels
                 if (_renounce.Text != value)
                 {
                     _renounce.Text = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Text));
                 }
             }
         }
@@ -41,15 +40,13 @@ namespace SaveUp.ViewModels
                 if (_renounce.Preis != value)
                 {
                     _renounce.Preis = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Preis));
                 }
             }
         }
 
         public DateTime Date => _renounce.Date;
-
         public string Identifier => _renounce.Filename;
-
         public ICommand SaveCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
 
@@ -64,7 +61,7 @@ namespace SaveUp.ViewModels
             _renounce.Date = DateTime.Now;
             _renounce.Save();
             await Shell.Current.GoToAsync($"..?saved={_renounce.Filename}");
-            
+
         }
 
         private async Task Delete()
@@ -91,10 +88,12 @@ namespace SaveUp.ViewModels
 
         private void RefreshProperties()
         {
-            
             OnPropertyChanged(nameof(Text));
             OnPropertyChanged(nameof(Preis));
             OnPropertyChanged(nameof(Date));
         }
+
+
+
     }
 }

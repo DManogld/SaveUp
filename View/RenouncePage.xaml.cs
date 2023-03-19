@@ -6,19 +6,4 @@ public partial class RenouncePage : ContentPage
 	{
 		InitializeComponent();
 	}
-
-    private void Preis_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        if (Double.TryParse(e.NewTextValue, out double value))
-        {
-            if (value < 0)
-            {
-                Preis.Text = e.OldTextValue;
-            }
-        }
-        else
-        {
-            Preis.Text = e.OldTextValue;
-        }
-    }
 }

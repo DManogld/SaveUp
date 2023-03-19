@@ -9,17 +9,20 @@
     <TabBar>
         <Tab Title="Eingabe"
              Icon="{StaticResource IconOne}">
-            <ShellContent Title="Alle Verzichte"
+            <ShellContent Title="Eingabe"
                           ContentTemplate="{DataTemplate views:AllRenoucesPage}"
                           Route="AllRenoucesPage"
                          />
         </Tab>
-
+        
         <Tab Title="Alle Verzichte"
              Icon="{StaticResource IconTwo}">
-            <ShellContent Title="Eintragen"
-                          ContentTemplate="{DataTemplate views:RenouncePage}"
-                          Route="RenouncePage" />
+            <ShellContent Title="Alle Verzichte"
+                          ContentTemplate="{DataTemplate views:SortAllRenouncesPage}"
+                          Route="RenouncePage" 
+                          
+                          />
+                           
         </Tab>
     </TabBar>
 

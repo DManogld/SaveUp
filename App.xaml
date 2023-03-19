@@ -5,9 +5,10 @@
              x:Class="SaveUp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="ToolbarBackgroundColor">#FF0000</Color>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.Maui;
 
-namespace SaveUp;
+namespace SaveUp.Resources;
 
 static class IconFont
 {

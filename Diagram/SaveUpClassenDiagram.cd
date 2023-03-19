@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SaveUp.Model.Renounce">
+    <Position X="10.5" Y="1.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAgIAAAAAQQAAgAAAAAAAAAAEAAAEBAAAACAAAAAE=</HashCode>
+      <FileName>Model\Renounce.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveUp.View.AllRenoucesPage">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AllRenoucesPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveUp.ViewModels.RenouncesViewModel" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.75" Width="5" />
+    <TypeIdentifier>
+      <HashCode>BBkAQAAAAGDAAACgAAAAAAMAAAAAQACAAAAAAABJEAA=</HashCode>
+      <FileName>ViewModels\RenouncesViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SaveUp.ViewModels.RenounceViewModel" BaseTypeListCollapsed="true">
+    <Position X="6" Y="1.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AgAAAIAAAAAAAAEAAAAAAAIAAAEAAAEhCAAASAgEAAA=</HashCode>
+      <FileName>ViewModels\RenounceViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SaveUp.View.RenouncePage">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\RenouncePage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveUp.View.SortAllRenouncesPage">
+    <Position X="2.5" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\SortAllRenounces.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

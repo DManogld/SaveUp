@@ -3,46 +3,129 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SaveUp.View.AllRenoucesPage"
              xmlns:viewModels="clr-namespace:SaveUp.ViewModels"
-             Title="AllRenoucesPage">
+             Title="Eingabe"
+             HeightRequest="8"
+             BackgroundColor="#e8e8fc">
 
     <ContentPage.BindingContext>
         <viewModels:RenouncesViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.Background>
+        <LinearGradientBrush EndPoint="0,1">
+            <GradientStop Color="White"
+                          Offset="0.1" />
+            <GradientStop Color="#007ACC"
+                          Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Margin"
+                        Value="5" />
+                <Setter Property="BackgroundColor"
+                        Value="#0062a3" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="CornerRadius"
+                        Value="20" />
+                <Setter Property="FontFamily"
+                        Value="Segoe UI" />
+                <Setter Property="FontSize"
+                        Value="16" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add"
                      Command="{Binding NewCommand}"
-                     IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
+                     IconImageSource="{FontImage Glyph='+', Color=White, Size=22}">
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <VerticalStackLayout>
-        <!-- Display notes in a list -->
-    <CollectionView x:Name="notesCollection"
-                    ItemsSource="{Binding AllRenounce}"
-                    Margin="20"
-                    SelectionMode="Single"
-                    SelectionChangedCommand="{Binding SelectRenounceCommand}"
-                    SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
-        <!-- Designate how the collection of items are laid out -->
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical"
-                               ItemSpacing="10" />
-        </CollectionView.ItemsLayout>
+    <StackLayout MaximumHeightRequest="30">
+        <Frame 
+               CornerRadius="0"
+               HasShadow="False"
+               Padding="-10"
+               Margin="15"
+              
+               VerticalOptions="Center">
+            <Image Source="Resources/Images/dotnet_bot.svg" />
+            <Frame.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="White"
+                                  Offset="0.1" />
+                    <GradientStop Color="#007ACC"
+                                  Offset="1.0" />
+                </LinearGradientBrush>
+            </Frame.Background>
+        </Frame>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="370"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            
+                <CollectionView x:Name="notesCollection"
+                                ItemsSource="{Binding AllRenounce}"
+                                Margin="20"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding SelectRenounceCommand}"
+                                SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}"
+                                VerticalScrollBarVisibility="Always"
+                                Grid.Row="1">
 
-        <!-- Define the appearance of each item in the list -->
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                        <Label Text="{Binding Text}"
-                               FontSize="22" />
-                        <Label Text="{Binding Date}"
-                           FontSize="14"
-                           TextColor="Silver" />
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal"></VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor"
+                                                        Value="LightSkyBlue"></Setter>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border Stroke="#9EB0C7"
+                                        StrokeThickness="0.2"
+                                        StrokeShape="RoundRectangle 0,0,0,0"
+                                        Background="#FFFFFF"
+                                        Padding="16,8"
+                                        HorizontalOptions="Fill">
+                                    <StackLayout Spacing="5">
+                                    <Label Text="{Binding Text, StringFormat='{0}'}"
+                                           FontSize="20"
+                                           FontFamily="Segoe UI"
+                                           TextColor="#333333" />
+                                    <Label Text="{Binding Preis, StringFormat='CHF {0:F2}'}"
+                                           FontSize="16"
+                                           FontFamily="Segoe UI"
+                                           TextColor="#666666" />
+                                    <Label Text="{Binding Date, Mode=TwoWay}"
+                                           FontSize="14"
+                                           FontFamily="Segoe UI"
+                                           TextColor="#999999" />
+                                    </StackLayout>
+                                </Border>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+          
+        </Grid>
         <Button Command="{Binding NewCommand}"
                 Text="Hinzufügen"></Button>
-    </VerticalStackLayout>
+        <Button Command="{Binding Deleteall}"
+                Text="Alle löschen"></Button>
+
+
+    </StackLayout>
 </ContentPage>

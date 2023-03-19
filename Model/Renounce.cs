@@ -1,12 +1,4 @@
-﻿using Microsoft.Maui.Storage;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Text.Json;
 
 namespace SaveUp.Model
 {
@@ -19,7 +11,7 @@ namespace SaveUp.Model
 
         public Renounce()
         {
-            Filename = $"{Path.GetRandomFileName()}.note.txt";
+            Filename = $"{Path.GetRandomFileName()}.renounce.txt";
             Date = DateTime.Now;
             Text = string.Empty;
             Preis = string.Empty;
@@ -27,43 +19,94 @@ namespace SaveUp.Model
 
         public void Save()
         {
-            string data = $"Artikel:{Text} | Preis: CHF.- {Preis}";
-            File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, Filename), data);
+            string data = $"Artikel:{Text} | Preis: {Preis}";
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, Filename);
+            if (File.Exists(filePath))
+            {
+                File.WriteAllText(filePath, data);
+            }
+            else
+            {
+                File.WriteAllText(filePath, data);
+                SaveToJson();
+            }
         }
 
-        public void Delete() =>
-            File.Delete(Path.Combine(FileSystem.AppDataDirectory, Filename));
+        private void SaveToJson()
+        {
+            List<Renounce> renounceList = LoadAll().ToList();
+            renounceList.Add(this);
+            string json = JsonSerializer.Serialize(renounceList);
+            File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, "renounceList.json"), json);
+        }
 
+        public void Delete()
+        {
+            File.Delete(Path.Combine(FileSystem.AppDataDirectory, Filename));
+            RemoveFromJson();
+
+        }
+
+        public void DeleteAll()
+        {
+            string appDataPath = FileSystem.AppDataDirectory;
+
+            if (!Directory.Exists(appDataPath))
+            {
+                return;
+            }
+            foreach (string file in Directory.GetFiles(appDataPath, "*.renounce.txt"))
+            {
+                File.Delete(file);
+            }
+            // Lösche die JSON-Datei mit der Liste der renounce-Objekte
+            string jsonFile = Path.Combine(appDataPath, "renounceList.json");
+            if (File.Exists(jsonFile))
+            {
+                File.Delete(jsonFile);
+            }
+        }
+
+        private void RemoveFromJson()
+        {
+            List<Renounce> renounceList = LoadAll().ToList();
+            renounceList.Remove(renounceList.Find(r => r.Filename == Filename));
+            string json = JsonSerializer.Serialize(renounceList);
+            File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, "renounceList.json"), json);
+        }
 
         public static Renounce Load(string filname)
         {
             filname = Path.Combine(FileSystem.AppDataDirectory, filname);
-
             if (!File.Exists(filname))
-                throw new FileNotFoundException("Unabel to find the file on locale starage", filname);
+                throw new FileNotFoundException("Unable to find the file on locale starage", filname);
 
+            string[] lines = File.ReadAllLines(filname);
+            string[] splitLine = lines[0].Split('|');
             return new Renounce()
             {
                 Filename = Path.GetFileName(filname),
-                Text = File.ReadAllText(filname),
-                Preis = File.ReadAllText(filname),
+                Text = splitLine[0].Substring(8),
+                Preis = splitLine[1].Substring(7),
                 Date = File.GetCreationTime(filname)
             };
         }
 
+
         public static IEnumerable<Renounce> LoadAll()
         {
             string appDataPath = FileSystem.AppDataDirectory;
-
-            return Directory
-                // Select the file name from the directory
-                .EnumerateFiles(appDataPath, "*.notes.txt")
-                //Each file is used to Load the Note
-                .Select(filename => Renounce.Load(Path.GetFileName(filename)))
-                // Order by...
-                .OrderByDescending(note => note.Date);
+            if (!File.Exists(Path.Combine(appDataPath, "renounceList.json")))
+            {
+                File.Create(Path.Combine(appDataPath, "renounceList.json")).Close();
+            }
+            string json = File.ReadAllText(Path.Combine(appDataPath, "renounceList.json"));
+            if (json == string.Empty)
+            {
+                return new List<Renounce>();
+            }
+            List<Renounce> renounceList = JsonSerializer.Deserialize<List<Renounce>>(json);
+            return renounceList.OrderByDescending(r => r.Date);
         }
     }
-
-
 }
