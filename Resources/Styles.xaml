@@ -13,8 +13,8 @@
     <FontImage x:Key="IconOne"
                FontFamily="FontAwesome"
                Size="22"
-               Color="{StaticResource Black}"
-               Glyph="{x:Static local:IconFont.Beer}" />
+               Color="{StaticResource Primary}"
+               Glyph="{x:Static local:IconFont.DiceFive}" />
     
     <FontImage x:Key="IconTwo"
                FontFamily="FontAwesome"

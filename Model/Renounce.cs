@@ -19,23 +19,29 @@ namespace SaveUp.Model
 
         public void Save()
         {
-            string data = $"Artikel:{Text} | Preis: {Preis}";
+            string data = $"Artikel:{Text}|Preis:{Preis}";
             string filePath = Path.Combine(FileSystem.AppDataDirectory, Filename);
-            if (File.Exists(filePath))
-            {
-                File.WriteAllText(filePath, data);
-            }
-            else
-            {
-                File.WriteAllText(filePath, data);
-                SaveToJson();
-            }
+            File.WriteAllText(filePath, data);
+            SaveToJson();
+
         }
 
         private void SaveToJson()
         {
             List<Renounce> renounceList = LoadAll().ToList();
-            renounceList.Add(this);
+            Renounce existingRenounce = renounceList.FirstOrDefault(r => r.Filename == this.Filename);
+            if (existingRenounce != null)
+            {
+                // Aktualisiere den vorhandenen Eintrag
+                existingRenounce.Date = this.Date;
+                existingRenounce.Preis = this.Preis;
+            }
+            else
+            {
+                // Füge den neuen Eintrag hinzu
+                renounceList.Add(this);
+            }
+
             string json = JsonSerializer.Serialize(renounceList);
             File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, "renounceList.json"), json);
         }
@@ -87,7 +93,7 @@ namespace SaveUp.Model
             {
                 Filename = Path.GetFileName(filname),
                 Text = splitLine[0].Substring(8),
-                Preis = splitLine[1].Substring(7),
+                Preis = splitLine[1].Substring(6),
                 Date = File.GetCreationTime(filname)
             };
         }

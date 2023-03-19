@@ -5,7 +5,8 @@
              xmlns:viewModels="clr-namespace:SaveUp.ViewModels"
              Title="Eingabe"
              HeightRequest="8"
-             BackgroundColor="#e8e8fc">
+             BackgroundColor="#e8e8fc"
+             NavigatedTo="ContentPage_NavigatedTo">
 
     <ContentPage.BindingContext>
         <viewModels:RenouncesViewModel />
@@ -54,7 +55,7 @@
                Margin="15"
               
                VerticalOptions="Center">
-            <Image Source="Resources/Images/dotnet_bot.svg" />
+            <Image Source="Resources/Images/logo.svg" />
             <Frame.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="White"

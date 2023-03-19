@@ -6,24 +6,23 @@
     xmlns:views="clr-namespace:SaveUp.View"
     Shell.FlyoutBehavior="Disabled">
 
+
     <TabBar>
         <Tab Title="Eingabe"
-             Icon="{StaticResource IconOne}">
+             Icon="house_solid.png">
             <ShellContent Title="Eingabe"
                           ContentTemplate="{DataTemplate views:AllRenoucesPage}"
-                          Route="AllRenoucesPage"
-                         />
+                          Route="AllRenoucesPage" />
+           
         </Tab>
         
         <Tab Title="Alle Verzichte"
-             Icon="{StaticResource IconTwo}">
+             Icon="list_solid.png">
             <ShellContent Title="Alle Verzichte"
                           ContentTemplate="{DataTemplate views:SortAllRenouncesPage}"
-                          Route="RenouncePage" 
-                          
-                          />
-                           
+                          Route="RenouncePage" />
         </Tab>
     </TabBar>
+   
 
 </Shell>
