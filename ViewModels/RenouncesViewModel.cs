@@ -15,9 +15,6 @@ namespace SaveUp.ViewModels
         public decimal TotalPrice => AllRenounce.Sum(r => decimal.Parse(r.Preis));
         public ICommand Deleteall { get; set; }
 
-
-
-
         private decimal dailySavings;
         public decimal DailySavings
         {
@@ -52,6 +49,10 @@ namespace SaveUp.ViewModels
 
         }
 
+        /// <summary>
+        /// Aktualisiert die täglichen, wöchentlichen und monatlichen Einsparungen
+        /// basierend auf der Verzichtsliste.
+        /// </summary>
         public void UpdateSavings()
         {
             CalculateDailySavings();
@@ -59,6 +60,9 @@ namespace SaveUp.ViewModels
             CalculateMonthlySavings();
         }
 
+        /// <summary>
+        /// Berechnet die tägliche Ersparnis basierend auf dem aktuellen Datum.
+        /// </summary>
         private void CalculateDailySavings()
         {
             DateTime today = DateTime.Today;
@@ -66,6 +70,9 @@ namespace SaveUp.ViewModels
             DailySavings = dailySavings;
         }
 
+        /// <summary>
+        ///  Berechnet die wöchentliche Einsparung basierend auf der aktuellen Woche.
+        /// </summary>
         private void CalculateWeeklySavings()
         {
             DateTime startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
@@ -73,6 +80,9 @@ namespace SaveUp.ViewModels
             WeeklySavings = weeklySavings;
         }
 
+        /// <summary>
+        /// Berechnet die monatliche Ersparnis basierend auf dem aktuellen Monat.
+        /// </summary>
         private void CalculateMonthlySavings()
         {
             DateTime startOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
@@ -80,6 +90,10 @@ namespace SaveUp.ViewModels
             MonthlySavings = monthlySavings;
         }
 
+        /// <summary>
+        /// Löscht alle Renounce aus der Liste.
+        /// </summary>
+        /// <returns></returns>
         public async Task DeleteAll()
         {
             Renounce renounce = new Renounce();
@@ -91,18 +105,30 @@ namespace SaveUp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigiert zur neuen RenouncePage.
+        /// </summary>
+        /// <returns></returns>
         private async Task NewRenounceAsync()
         {
             await Shell.Current.GoToAsync(nameof(View.RenouncePage));
         }
 
+        /// <summary>
+        /// Wählt einen bestimmten Renounce aus und navigiert zu seiner Detailseite.
+        /// </summary>
+        /// <param name="renounce">Die Auserwählten renounce.</param>
+        /// <returns></returns>
         private async Task SelectRenounceAsync(RenounceViewModel renounce)
         {
             if (renounce != null)
                 await Shell.Current.GoToAsync($"{nameof(View.RenouncePage)}?load={renounce.Identifier}");
         }
 
-
+        /// <summary>
+        /// Aktualisiert die Renounce Liste und den Gesamtpreis und die Spareigenschaften.
+        /// </summary>
+        /// <returns></returns>
         public async Task UpdateRenouncesList()
         {
             AllRenounce.Clear();
@@ -116,7 +142,10 @@ namespace SaveUp.ViewModels
             UpdateSavings();
         }
 
-
+        /// <summary>
+        /// Wendet Abfrageattribute auf die Verzichtsliste an.
+        /// </summary>
+        /// <param name="query">Ein Wörterbuch mit anzuwendenden Abfrageattributen</param>
         void IQueryAttributable.ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("deleted"))
@@ -126,12 +155,7 @@ namespace SaveUp.ViewModels
 
                 // If resource exists, delete it
                 if (matchedRenounce != null)
-                {
-
                     AllRenounce.Remove(matchedRenounce);
-
-                }
-
             }
             else if (query.ContainsKey("saved"))
             {

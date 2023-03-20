@@ -41,7 +41,6 @@ namespace SaveUp.Model
                 // Füge den neuen Eintrag hinzu
                 renounceList.Add(this);
             }
-
             string json = JsonSerializer.Serialize(renounceList);
             File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, "renounceList.json"), json);
         }
@@ -50,7 +49,6 @@ namespace SaveUp.Model
         {
             File.Delete(Path.Combine(FileSystem.AppDataDirectory, Filename));
             RemoveFromJson();
-
         }
 
         public void DeleteAll()
@@ -86,6 +84,7 @@ namespace SaveUp.Model
             filname = Path.Combine(FileSystem.AppDataDirectory, filname);
             if (!File.Exists(filname))
                 throw new FileNotFoundException("Unable to find the file on locale starage", filname);
+
 
             string[] lines = File.ReadAllLines(filname);
             string[] splitLine = lines[0].Split('|');

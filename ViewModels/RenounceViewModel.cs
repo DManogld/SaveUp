@@ -92,8 +92,5 @@ namespace SaveUp.ViewModels
             OnPropertyChanged(nameof(Preis));
             OnPropertyChanged(nameof(Date));
         }
-
-
-
     }
 }
