@@ -50,12 +50,22 @@ namespace SaveUp.ViewModels
         public ICommand SaveCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
 
+
+        /// <summary>
+        /// SetupCommands-Methode wird verwendet,um neue AsyncRelayCommand-Objekte zu initialisieren,
+        /// die Save- und Delete-Methoden ausführen.
+        /// </summary>
         private void SetupCommands()
         {
             SaveCommand = new AsyncRelayCommand(Save);
             DeleteCommand = new AsyncRelayCommand(Delete);
         }
 
+        /// <summary>
+        /// Save-Methode aktualisiert das Datum des _renounce-Objekts, speichert es und navigiert 
+        /// zur vorherigen Seite mit einem Query-Parameter, der das Dateinamen angibt.
+        /// </summary>
+        /// <returns></returns>
         private async Task Save()
         {
             _renounce.Date = DateTime.Now;
@@ -64,6 +74,11 @@ namespace SaveUp.ViewModels
 
         }
 
+        /// <summary>
+        /// Delete-Methode löscht das _renounce-Objekt und navigiert zur vorherigen Seite
+        /// mit einem Query-Parameter, der das Dateinamen angibt.
+        /// </summary>
+        /// <returns></returns>
         private async Task Delete()
         {
             _renounce.Delete();
@@ -71,6 +86,11 @@ namespace SaveUp.ViewModels
         }
 
 
+        /// <summary>
+        /// ApplyQueryAttributes-Methode prüft, ob der "load"-Query-Parameter im übergebenen "query" -Wörterbuch vorhanden ist
+        /// und lädt die entsprechende Ressource, um die Anzeige zu aktualisieren.
+        /// </summary>
+        /// <param name="query"></param>
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.ContainsKey("load"))
@@ -80,12 +100,19 @@ namespace SaveUp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Reload-Methode lädt die Daten des _renounce-Objekts neu und aktualisiert die angezeigten Eigenschaften.
+        /// </summary>
         public void Reload()
         {
             _renounce = Model.Renounce.Load(_renounce.Filename);
             RefreshProperties();
         }
 
+
+        /// <summary>
+        /// RefreshProperties-Methode aktualisiert alle anzuzeigenden Eigenschaften des _renounce-Objekts.
+        /// </summary>
         private void RefreshProperties()
         {
             OnPropertyChanged(nameof(Text));

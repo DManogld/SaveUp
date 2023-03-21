@@ -13,9 +13,7 @@
             <ShellContent Title="Eingabe"
                           ContentTemplate="{DataTemplate views:AllRenoucesPage}"
                           Route="AllRenoucesPage" />
-           
         </Tab>
-        
         <Tab Title="Alle Verzichte"
              Icon="list_solid.png">
             <ShellContent Title="Alle Verzichte"

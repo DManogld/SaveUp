@@ -101,7 +101,7 @@ namespace SaveUp.ViewModels
             if (answer)
             {
                 renounce.DeleteAll();
-                UpdateRenouncesList();
+                await UpdateRenouncesList();
             }
         }
 

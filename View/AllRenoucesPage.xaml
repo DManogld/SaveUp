@@ -48,7 +48,7 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout MaximumHeightRequest="30">
-        <Frame 
+        <!--<Frame 
                CornerRadius="0"
                HasShadow="False"
                Padding="-10"
@@ -64,7 +64,9 @@
                                   Offset="1.0" />
                 </LinearGradientBrush>
             </Frame.Background>
-        </Frame>
+        </Frame>-->
+        <Image
+            Source="Resources/Images/logo.svg" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>

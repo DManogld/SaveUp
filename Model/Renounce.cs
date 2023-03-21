@@ -17,15 +17,20 @@ namespace SaveUp.Model
             Preis = string.Empty;
         }
 
+        /// <summary>
+        /// Speichert ein Renounce-Objekt in einer Textdatei und in der JSON-Datei
+        /// </summary>
         public void Save()
         {
             string data = $"Artikel:{Text}|Preis:{Preis}";
             string filePath = Path.Combine(FileSystem.AppDataDirectory, Filename);
             File.WriteAllText(filePath, data);
             SaveToJson();
-
         }
 
+        /// <summary>
+        /// Speichert eine Liste von Renounce-Objekten in der JSON-Datei
+        /// </summary>
         private void SaveToJson()
         {
             List<Renounce> renounceList = LoadAll().ToList();
@@ -45,12 +50,20 @@ namespace SaveUp.Model
             File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, "renounceList.json"), json);
         }
 
+
+        /// <summary>
+        /// Löscht die Textdatei und das Renounce-Objekt aus der JSON-Datei
+        /// </summary>
         public void Delete()
         {
             File.Delete(Path.Combine(FileSystem.AppDataDirectory, Filename));
             RemoveFromJson();
         }
 
+
+        /// <summary>
+        /// Löscht alle Textdateien und alle Renounce-Objekte aus der JSON-Datei
+        /// </summary>
         public void DeleteAll()
         {
             string appDataPath = FileSystem.AppDataDirectory;
@@ -71,6 +84,9 @@ namespace SaveUp.Model
             }
         }
 
+        /// <summary>
+        /// Entfernt das Renounce-Objekt aus der JSON-Datei
+        /// </summary>
         private void RemoveFromJson()
         {
             List<Renounce> renounceList = LoadAll().ToList();
@@ -79,12 +95,18 @@ namespace SaveUp.Model
             File.WriteAllText(Path.Combine(FileSystem.AppDataDirectory, "renounceList.json"), json);
         }
 
+
+        /// <summary>
+        /// Lädt ein Renounce-Objekt aus einer Textdatei
+        /// </summary>
+        /// <param name="filname"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
         public static Renounce Load(string filname)
         {
             filname = Path.Combine(FileSystem.AppDataDirectory, filname);
             if (!File.Exists(filname))
                 throw new FileNotFoundException("Unable to find the file on locale starage", filname);
-
 
             string[] lines = File.ReadAllLines(filname);
             string[] splitLine = lines[0].Split('|');
@@ -97,7 +119,10 @@ namespace SaveUp.Model
             };
         }
 
-
+        /// <summary>
+        /// Lädt alle Renounce-objekte aus dem lokalen Speicher in absteigender Reihenfolge ihres Erstellungsdatums.
+        /// </summary>
+        /// <returns>An IEnumerable collection of Renounce objects.</returns>
         public static IEnumerable<Renounce> LoadAll()
         {
             string appDataPath = FileSystem.AppDataDirectory;

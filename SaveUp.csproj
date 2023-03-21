@@ -30,6 +30,14 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+		<AndroidKeyStore>false</AndroidKeyStore>
+		<AndroidSigningKeyStore>C:\Users\Administrator\Modul335_Arbeiten\Trys\SaveUp\myapp.keystore</AndroidSigningKeyStore>
+		<AndroidSigningKeyAlias>MyAppkey</AndroidSigningKeyAlias>
+		<AndroidSigningKeyPass>Mailand2022!</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>Mailand2022!</AndroidSigningStorePass>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#7babd1" />
@@ -54,6 +62,7 @@
 	  <None Remove="Resources\Images\house_solid.svg" />
 	  <None Remove="Resources\Images\list_solid.svg" />
 	  <None Remove="Resources\Images\Logo.svg" />
+	  <None Remove="Resources\Splash\splash.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,6 +84,10 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Styles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiSplashScreen Include="Resources\Splash\splash.svg"  Color="#7babd1"/>
 	</ItemGroup>
 
 </Project>
