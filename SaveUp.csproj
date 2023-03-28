@@ -83,11 +83,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Documentation\" />
 	  <Folder Include="Resources\Styles\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\splash.svg"  Color="#7babd1"/>
+	  <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#7babd1" />
 	</ItemGroup>
 
 </Project>

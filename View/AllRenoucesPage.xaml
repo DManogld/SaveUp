@@ -48,23 +48,6 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout MaximumHeightRequest="30">
-        <!--<Frame 
-               CornerRadius="0"
-               HasShadow="False"
-               Padding="-10"
-               Margin="15"
-              
-               VerticalOptions="Center">
-            <Image Source="Resources/Images/logo.svg" />
-            <Frame.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="White"
-                                  Offset="0.1" />
-                    <GradientStop Color="#007ACC"
-                                  Offset="1.0" />
-                </LinearGradientBrush>
-            </Frame.Background>
-        </Frame>-->
         <Image
             Source="Resources/Images/logo.svg" />
         <Grid>
@@ -128,7 +111,5 @@
                 Text="Hinzufügen"></Button>
         <Button Command="{Binding Deleteall}"
                 Text="Alle löschen"></Button>
-
-
     </StackLayout>
 </ContentPage>
